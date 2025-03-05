@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 with open("moje_heslo.txt", 'r') as file:
     password = file.read()
 
-eng = create_engine(f'mysql://root:{password}@localhost:3306/car_rental')
+eng = create_engine(f'mysql+mysqlconnector://root:{password}@localhost:3306/car_rental')
 
 base = declarative_base()
 
