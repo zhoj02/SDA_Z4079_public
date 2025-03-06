@@ -63,10 +63,13 @@ class Bookings(base):
 Session = sessionmaker(bind=eng)
 
 session = Session()
-
+#1
 result = session.query(Clients).filter_by(client_id=5)
 for client in result:
-    print(client)
+    for booking in client.bookings:
+        print(booking.car)
+
+#2
 
 # conn = eng.connect()
 # s = select(Bookings).where(Bookings.client_id==3)
