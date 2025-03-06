@@ -66,3 +66,5 @@ session = Session()
 result = session.query(Bookings).filter(Bookings.client_id==3)
 for booking in result:
     print(booking)
+
+
