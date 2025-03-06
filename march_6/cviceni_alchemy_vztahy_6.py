@@ -67,10 +67,10 @@ Session = sessionmaker(bind=eng)
 
 session = Session()
 result = (
-    session.query(Clients.name, Clients.surname, func.sum(Bookings.total_amount))
-    .join(Bookings)
+    session.query(Clients.client_id, Clients.name, Clients.surname, func.sum(Bookings.total_amount))
+    .join(Clients)
     .filter(
-        and_(Bookings.start_date <= '2020-07-17', Bookings.start_date >= '2020-07-10')
+        and_(Bookings.end_date <= '2020-07-17', Bookings.start_date >= '2020-07-10')
     )
     .group_by(Clients.client_id)
     .all()
