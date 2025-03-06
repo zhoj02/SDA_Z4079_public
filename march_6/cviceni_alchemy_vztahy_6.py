@@ -67,7 +67,7 @@ Session = sessionmaker(bind=eng)
 
 session = Session()
 result = (
-    session.query(Clients.client_id, func.sum(Bookings.total_amount))
+    session.query(Clients.name, Clients.surname, func.sum(Bookings.total_amount))
     .join(Bookings)
     .filter(
         and_(Bookings.start_date <= '2020-07-17', Bookings.start_date >= '2020-07-10')
@@ -76,3 +76,11 @@ result = (
     .all()
 )
 print(result)
+
+# Hromadka pro 6:
+# 6, 1900
+# 6, 1200
+#
+# Hromadka pro 7:
+# 7, 1800
+# 7, 1700
