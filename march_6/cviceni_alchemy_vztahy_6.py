@@ -5,6 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import select
 from sqlalchemy import join
+from sqlalchemy.sql import func
 from sqlalchemy import and_
 
 with open("moje_heslo.txt", 'r') as file:
@@ -66,11 +67,12 @@ Session = sessionmaker(bind=eng)
 
 session = Session()
 result = (
-    session.query(Clients.client_id, Bookings.total_amount)
+    session.query(Clients.client_id, func.sum(Bookings.total_amount))
     .join(Bookings)
     .filter(
         and_(Bookings.start_date <= '2020-07-17', Bookings.start_date >= '2020-07-10')
     )
+    .group_by(Clients.client_id)
     .all()
 )
 print(result)
