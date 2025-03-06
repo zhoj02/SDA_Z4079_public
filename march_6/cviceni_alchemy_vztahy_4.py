@@ -4,6 +4,7 @@ from sqlalchemy import Column, String, Integer, Date
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import select
+from sqlalchemy import join
 
 with open("moje_heslo.txt", 'r') as file:
     password = file.read()
@@ -70,6 +71,11 @@ for client in result:
         print(booking.car)
 
 #2
+result = session.query(Bookings).filter_by(client_id=5)
+for booking in result:
+    print(booking.car)
+
+#3
 result = session.query(Bookings).filter_by(client_id=5)
 for booking in result:
     print(booking.car)
