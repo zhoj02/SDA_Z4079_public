@@ -80,4 +80,10 @@ for booking in result:
 JOIN Bookings on Cars.car_id = Bookings.car_id
 WHERE Bookings.client_id = 5
 """
-j = join()
+j = join(Bookings, Cars, Bookings.car_id == Cars.car_id)
+s = select(Cars).select_from(j).where(Bookings.client_id==5)
+
+conn = eng.connect()
+result = conn.execute(s)
+for car in result:
+    print(car)
