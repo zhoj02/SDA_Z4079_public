@@ -63,3 +63,5 @@ Session = sessionmaker(bind=eng)
 
 session = Session()
 
+result = session.query(Bookings).filter(Bookings.client_id==3)
+print(result)
