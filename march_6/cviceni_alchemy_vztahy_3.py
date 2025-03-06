@@ -3,6 +3,7 @@ from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, String, Integer, Date
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import select
 
 with open("moje_heslo.txt", 'r') as file:
     password = file.read()
@@ -66,5 +67,10 @@ session = Session()
 result = session.query(Bookings).filter(Bookings.client_id==3)
 for booking in result:
     print(booking)
+
+conn = eng.connect()
+s = select(Bookings).where(Bookings.client_id==3)
+result = conn.execute(s).fetchall()
+print(result)
 
 
