@@ -62,9 +62,4 @@ class Bookings(base):
 Session = sessionmaker(bind=eng)
 
 session = Session()
-for client in clients:
-    insert_data(session, Clients, client)
-for car in cars:
-    insert_data(session, Cars, car)
-for booking in bookings:
-    insert_data(session, Bookings, booking)
+
