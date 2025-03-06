@@ -76,11 +76,8 @@ for booking in result:
     print(booking.car)
 
 #3
-result = session.query(Bookings).filter_by(client_id=5)
-for booking in result:
-    print(booking.car)
-
-# conn = eng.connect()
-# s = select(Bookings).where(Bookings.client_id==3)
-# result = conn.execute(s).fetchall()
-# print(result)
+"""SELECT * FROM Cars 
+JOIN Bookings on Cars.car_id = Bookings.car_id
+WHERE Bookings.client_id = 5
+"""
+j = join()
