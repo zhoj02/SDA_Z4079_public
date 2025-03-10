@@ -33,6 +33,6 @@ with connect(user="root", password="YourNewPassword", database="car_rental") as 
 
         cursor.execute("""
         INSERT INTO clients (name, surname, address, city)
-        VALUES 
+        VALUES (%(name)s, %(surname)s, %(address)s, %(city)s)
         """)
         conn.commit()
