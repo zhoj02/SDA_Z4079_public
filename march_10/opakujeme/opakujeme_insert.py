@@ -30,9 +30,12 @@ with connect(user="root", password="YourNewPassword", database="car_rental") as 
             {"name": "maria", "surname": "majerova", "address": "Sokolovská", "city": "Brno"},
             {"name": "jan", "surname": "honzik", "address": "Sokolovská", "city": "Ostrava"}
         ]
+        data = [('jan', 'pavel', 'Sokolovská','Prague'),
+        ('maria', 'majerova', 'Sokolovská','Brno'),
+        ('jan', 'honzik', 'Sokolovská','Ostrava')]
 
         cursor.executemany("""
         INSERT INTO clients (name, surname, address, city)
-        VALUES (%(name)s, %(surname)s, %(address)s, %(city)s)
+        VALUES (%s, %s, %s, %s)
         """, data)
         conn.commit()
