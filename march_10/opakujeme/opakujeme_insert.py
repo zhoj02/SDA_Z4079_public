@@ -20,3 +20,4 @@ with connect(user="root", password="YourNewPassword", database="car_rental") as 
         ('maria', 'majerova', 'Sokolovská','Brno'),
         ('jan', 'honzik', 'Sokolovská','Ostrava')
         """)
+        cursor.commit()
