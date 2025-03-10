@@ -34,8 +34,5 @@ with connect(user="root", password="YourNewPassword", database="car_rental") as 
         cursor.execute("""
         INSERT INTO clients (name, surname, address, city)
         VALUES 
-        ('jan', 'pavel', 'Sokolovská','Prague'),
-        ('maria', 'majerova', 'Sokolovská','Brno'),
-        ('jan', 'honzik', 'Sokolovská','Ostrava')
         """)
         conn.commit()
