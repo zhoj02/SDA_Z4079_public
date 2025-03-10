@@ -9,3 +9,5 @@ session = Session()
 result = session.execute(text("SELECT 1")).all()
 print(result)
 # Vytvorit databazi s nazvem bank
+session.execute(text("CREATE DATABASE bank"))
+
