@@ -1,1 +1,1 @@
-# insert 3 klientu
+# insert 3 klienty
