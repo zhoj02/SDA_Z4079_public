@@ -6,4 +6,5 @@ eng = create_engine(f'mysql://root:YourNewPassword@localhost:3306/')
 Session = sessionmaker(bind=eng)
 session = Session()
 
-result = session.execute(text())
+result = session.execute(text("SELECT 1")).all()
+print(result)
