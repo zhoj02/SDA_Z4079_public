@@ -1,0 +1,1 @@
+# Vyber bookings, ktere maji vyssi hodnotu nez 500
