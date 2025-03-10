@@ -4,7 +4,6 @@ from mysql.connector import connect
 with connect(host="localhost", user="root", password="YourNewPassword") as conn:
     test_select = "SELECT 1;"
 
-    cursor = conn.cursor()
-
-    cursor.execute(test_select)
-    print(cursor.fetchall())
+    with conn.cursor() as cursor:
+        cursor.execute(test_select)
+        print(cursor.fetchall())
