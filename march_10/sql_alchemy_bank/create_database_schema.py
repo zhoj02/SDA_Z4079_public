@@ -18,12 +18,14 @@ eng = create_engine(f'mysql+mysqlconnector://root:YourNewPassword@localhost:3306
 
 base = declarative_base()
 
+
 class Transaction(base):
     __tablename__ = 'transaction'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     datum = Column(DateTime, default=datetime.now)
 
+base.metadata.drop_all(eng)
 base.metadata.create_all(eng)
 
 Session = sessionmaker(bind=eng)
