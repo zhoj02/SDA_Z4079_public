@@ -14,12 +14,12 @@ from sqlalchemy import Column, String, Integer, Date
 from sqlalchemy.orm import sessionmaker
 
 
-eng = create_engine(f'mysql://root:YourNewPassword@localhost:3306/car_rental')
+eng = create_engine(f'mysql+mysqlconnector://root:YourNewPassword@localhost:3306/car_rental')
 
 base = declarative_base()
 
 class Transaction(base):
-    __tablename__ = 'transcation'
+    __tablename__ = 'transaction'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     datum = Column(DateTime, default=datetime.now)
