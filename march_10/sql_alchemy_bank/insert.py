@@ -23,7 +23,7 @@ session = Session()
 # )
 # session.commit()
 
-result = session.query(Client.accounts)
+result = session.query(Account.id)
 for client in result:
     print(client)
 
