@@ -51,7 +51,7 @@ class Transaction(base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     acc_no_out = Column(Integer, ForeignKey(column='account.id'))
-    # acc_no_inc = Column(String(20), ForeignKey(column='account.id', ondelete='cascade'))
+    acc_no_inc = Column(Integer, ForeignKey(column='account.id', ondelete='cascade'))
     amount = Column(Float)
     date = Column(DateTime, default=datetime.now)
 
