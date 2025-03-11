@@ -24,6 +24,7 @@ class Account(base):
     client_id = Column(Integer, ForeignKey(column='client.id', ondelete="CASCADE"))
     cislo_uctu = Column(String(20))
     druh_uctu = Column(String(20))
+    client = relationship('Clients')
 
 
 class Client(base):

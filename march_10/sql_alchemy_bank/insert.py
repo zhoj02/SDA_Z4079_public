@@ -10,10 +10,19 @@ Session = sessionmaker(bind=eng)
 
 session = Session()
 
-session.add_all(
-    [Client(name="jan",surname="novak", address="Praha", birth_date="2024-12-20"),
-Client(name="petr",surname="novak", address="Praha", birth_date=datetime(2010,1,1)),
-])
-session.commit()
+# session.add_all(
+#     [Client(name="jan",surname="novak", address="Praha", birth_date="2024-12-20"),
+# Client(name="petr",surname="novak", address="Praha", birth_date=datetime(2010,1,1)),
+# ])
+# session.commit()
 
-print(session.query(Client).all())
+# session.add_all(
+#     [Account(client_id=1, cislo_uctu="1478478547", druh_uctu="sporici"),
+#     Account(client_id=1, cislo_uctu="1478478547", druh_uctu="sporici"),
+#      ]
+# )
+# session.commit()
+
+result = session.query(Client.accounts)
+for client in result:
+    print(client)
