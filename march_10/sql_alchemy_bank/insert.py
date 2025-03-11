@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
 from database_definition import Transaction, Client, Account
@@ -26,3 +26,5 @@ session = Session()
 result = session.query(Client.accounts)
 for client in result:
     print(client)
+
+# print(session.execute(text("SELECT * FROM client")).all())

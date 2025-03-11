@@ -24,7 +24,10 @@ class Account(base):
     client_id = Column(Integer, ForeignKey(column='client.id', ondelete="CASCADE"))
     cislo_uctu = Column(String(20))
     druh_uctu = Column(String(20))
-    client = relationship('Clients')
+    client = relationship('Client', back_populates='accounts', cascade="all, delete")
+
+    def __repr__(self):
+        return f"cislo uctu: {self.cislo_uctu}"
 
 
 class Client(base):
@@ -36,7 +39,7 @@ class Client(base):
     surname = Column(String(20))
     address = Column(String(20))
     birth_date = Column(Date)
-    accounts = relationship('Account')
+    accounts = relationship('Account', back_populates='client', cascade="all, delete")
 
 
 class Transaction(base):
