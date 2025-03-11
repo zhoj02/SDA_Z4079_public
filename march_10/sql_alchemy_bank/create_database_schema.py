@@ -10,7 +10,7 @@ from sqlalchemy import Column, String, Integer, DateTime, Time, Date, Any, Float
 
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, String, Integer, Date
+from sqlalchemy import Column, String, Integer, Date, ForeignKey, Boolean
 from sqlalchemy.orm import sessionmaker
 
 
@@ -24,8 +24,8 @@ class Transaction(base):
     __tablename__ = 'transaction'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    acc_no_out = Column(String(20))
-    acc_no_inc = Column(String(20))
+    acc_no_out = Column(String(20), ForeignKey(column='account.id', ondelete='cascade'))
+    acc_no_inc = Column(String(20), ForeignKey(column='account.id', ondelete='cascade'))
     amount = Column(Float)
     date = Column(DateTime, default=datetime.now)
 
@@ -44,6 +44,7 @@ class Accounts:
     # 2. Ucet - id, cislo_uctu, druh_uctu
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    client_id = Column(Integer, ForeignKey(column='client.id', ondelete="CASCADE"))
     cislo_uctu = Column(String(20))
     druh_uctu = Column(String(20))
 
