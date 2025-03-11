@@ -18,20 +18,25 @@ eng = create_engine(f'mysql+mysqlconnector://root:YourNewPassword@localhost:3306
 
 base = declarative_base()
 
+# Session = sessionmaker(bind=eng)
+# session = Session()
+# session.execute(text("DROP TABLE IF EXISTS account"))
+# session.execute(text("DROP TABLE IF EXISTS transaction"))
+# session.execute(text("DROP TABLE IF EXISTS client"))
 
-class Transaction(base):
-    # 3. Tabulka - Transakce - id, cislo_uctu_odchozi,  cislo_uctu_prichozi, castka, cas transakce, datum transakce
-    __tablename__ = 'transaction'
+class Account(base):
+    # 2. Ucet - id, cislo_uctu, druh_uctu
+    __tablename__ = 'account'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    acc_no_out = Column(String(20), ForeignKey(column='account.id', ondelete='cascade'))
-    acc_no_inc = Column(String(20), ForeignKey(column='account.id', ondelete='cascade'))
-    amount = Column(Float)
-    date = Column(DateTime, default=datetime.now)
+    client_id = Column(Integer, ForeignKey(column='client.id', ondelete="CASCADE"))
+    cislo_uctu = Column(String(20))
+    druh_uctu = Column(String(20))
 
 
-class Client:
+class Client(base):
     # 1. Tabulka - Clienti - id, jmeno, prijmeni, adresu, datum narozeni
+    __tablename__ = 'client'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(20))
@@ -40,18 +45,20 @@ class Client:
     birth_date = Column(Date)
 
 
-class Accounts:
-    # 2. Ucet - id, cislo_uctu, druh_uctu
+class Transaction(base):
+    # 3. Tabulka - Transakce - id, cislo_uctu_odchozi,  cislo_uctu_prichozi, castka, cas transakce, datum transakce
+    __tablename__ = 'transaction'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    client_id = Column(Integer, ForeignKey(column='client.id', ondelete="CASCADE"))
-    cislo_uctu = Column(String(20))
-    druh_uctu = Column(String(20))
+    acc_no_out = Column(Integer, ForeignKey(column='account.id'))
+    # acc_no_inc = Column(String(20), ForeignKey(column='account.id', ondelete='cascade'))
+    amount = Column(Float)
+    date = Column(DateTime, default=datetime.now)
+
 
 
 base.metadata.drop_all(eng)
+
 base.metadata.create_all(eng)
 
-Session = sessionmaker(bind=eng)
-session = Session()
-print(session.query(Transaction).all())
+
