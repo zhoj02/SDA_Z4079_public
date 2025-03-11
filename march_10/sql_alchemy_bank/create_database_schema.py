@@ -20,10 +20,14 @@ base = declarative_base()
 
 
 class Transaction(base):
+    # 3. Tabulka - Transakce - id, cislo_uctu_odchozi,  cislo_uctu_prichozi, castka, cas transakce, datum transakce
     __tablename__ = 'transaction'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    acc_no_out = Column(String(20))
+    acc_no_inc = Column(String(20))
     datum = Column(DateTime, default=datetime.now)
+
 
 base.metadata.drop_all(eng)
 base.metadata.create_all(eng)
@@ -31,9 +35,3 @@ base.metadata.create_all(eng)
 Session = sessionmaker(bind=eng)
 session = Session()
 print(session.query(Transaction).all())
-
-
-
-
-
-
