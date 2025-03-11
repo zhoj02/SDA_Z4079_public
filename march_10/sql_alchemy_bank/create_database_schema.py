@@ -9,7 +9,7 @@ from datetime import datetime
 from sqlalchemy import Column, String, Integer, DateTime, Time, Date, Any, Float, Boolean
 
 from sqlalchemy import create_engine, text
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy import Column, String, Integer, Date, ForeignKey, Boolean
 from sqlalchemy.orm import sessionmaker
 
@@ -18,11 +18,14 @@ eng = create_engine(f'mysql+mysqlconnector://root:YourNewPassword@localhost:3306
 
 base = declarative_base()
 
-# Session = sessionmaker(bind=eng)
-# session = Session()
+Session = sessionmaker(bind=eng)
+session = Session()
 # session.execute(text("DROP TABLE IF EXISTS account"))
 # session.execute(text("DROP TABLE IF EXISTS transaction"))
+# session.execute(text("DROP TABLE IF EXISTS account_test"))
+# session.execute(text("DROP TABLE IF EXISTS transaction"))
 # session.execute(text("DROP TABLE IF EXISTS client"))
+
 
 class Account(base):
     # 2. Ucet - id, cislo_uctu, druh_uctu
@@ -43,6 +46,7 @@ class Client(base):
     surname = Column(String(20))
     address = Column(String(20))
     birth_date = Column(Date)
+    accounts = relationship('Account')
 
 
 class Transaction(base):
@@ -57,8 +61,12 @@ class Transaction(base):
 
 
 
+
 base.metadata.drop_all(eng)
 
 base.metadata.create_all(eng)
+
+session.query(Client.accounts)
+
 
 
