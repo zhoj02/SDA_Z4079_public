@@ -24,7 +24,9 @@ session = Session()
 session.commit()
 result = session.query(Client).all()
 for i in result:
-    print(i.accounts)
+    for account in i.accounts:
+        print(account.cislo_uctu)
+
 
 # print(session.execute(text("SELECT * FROM client")).all())
 
