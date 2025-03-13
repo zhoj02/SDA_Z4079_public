@@ -41,6 +41,9 @@ class Client(base):
     birth_date = Column(Date)
     accounts = relationship('Account', back_populates='client', cascade="all, delete")
 
+    def __repr__(self):
+        return f"Client: {self.name} {self.surname}"
+
 
 class Transaction(base):
     # 3. Tabulka - Transakce - id, cislo_uctu_odchozi,  cislo_uctu_prichozi, castka, cas transakce, datum transakce

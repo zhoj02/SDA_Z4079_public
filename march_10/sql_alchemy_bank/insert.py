@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from database_definition import Transaction, Client, Account
 from datetime import datetime
 
-eng = create_engine(f'mysql://root:YourNewPassword@localhost:3306/car_rental')
+eng = create_engine(f'mysql+mysqlconnector://root:YourNewPassword@localhost:3306/car_rental')
 
 Session = sessionmaker(bind=eng)
 
@@ -21,12 +21,10 @@ session = Session()
 #     Account(client_id=1, cislo_uctu="178547414", druh_uctu="bezny"),
 #      ]
 # )
-# session.commit()
+session.commit()
 result = session.query(Client).all()
-print(len(result))
-session.delete(result[1])
-result = session.query(Client).all()
-print(len(result))
+for i in result:
+    print(i.accounts)
 
 # print(session.execute(text("SELECT * FROM client")).all())
 
