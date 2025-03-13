@@ -8,6 +8,7 @@ from datetime import datetime
 # all datatypes imports, not foreign key, only datatypes
 from sqlalchemy import Column, String, Integer, DateTime, Time, Date, Any, Float, Boolean
 
+
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy import Column, String, Integer, Date, ForeignKey, Boolean
@@ -28,25 +29,22 @@ session = Session()
 
 
 class Account(base):
-    # 2. Ucet - id, cislo_uctu, druh_uctu
     __tablename__ = 'account'
-
     id = Column(Integer, primary_key=True, autoincrement=True)
-    client_id = Column(Integer, ForeignKey(column='client.id', ondelete="CASCADE"))
+    client_id = Column(Integer, ForeignKey('client.id', ondelete="CASCADE"))
     cislo_uctu = Column(String(20))
     druh_uctu = Column(String(20))
+    client = relationship("Client", back_populates="accounts")  # New relationship
 
 
 class Client(base):
-    # 1. Tabulka - Clienti - id, jmeno, prijmeni, adresu, datum narozeni
     __tablename__ = 'client'
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(20))
     surname = Column(String(20))
     address = Column(String(20))
     birth_date = Column(Date)
-    accounts = relationship('Account')
+    accounts = relationship("Account", back_populates="client")
 
 
 class Transaction(base):
@@ -58,8 +56,6 @@ class Transaction(base):
     acc_no_inc = Column(Integer, ForeignKey(column='account.id', ondelete='cascade'))
     amount = Column(Float)
     date = Column(DateTime, default=datetime.now)
-
-
 
 
 base.metadata.drop_all(eng)

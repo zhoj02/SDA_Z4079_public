@@ -15,16 +15,18 @@ session = Session()
 # Client(name="petr",surname="novak", address="Praha", birth_date=datetime(2010,1,1)),
 # ])
 # session.commit()
-
+#
 # session.add_all(
 #     [Account(client_id=1, cislo_uctu="1478478547", druh_uctu="sporici"),
-#     Account(client_id=1, cislo_uctu="1478478547", druh_uctu="sporici"),
+#     Account(client_id=1, cislo_uctu="178547414", druh_uctu="bezny"),
 #      ]
 # )
 # session.commit()
-
-result = session.query(Account).join(Client).all()
-for client in result:
-    print(client)
+result = session.query(Client).all()
+print(len(result))
+session.delete(result[1])
+result = session.query(Client).all()
+print(len(result))
 
 # print(session.execute(text("SELECT * FROM client")).all())
+
